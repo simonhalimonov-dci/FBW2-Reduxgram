@@ -20,4 +20,29 @@ There are actually quite a lot of steps included to make this React + Redux appl
   2. Create the store with the `createStore` function from Redux and pass it the reducer and the defaultState
   3. Create the actions in `./actions/actionCreators.js`
   4. Create the reducers in `./reducers/comments.js`, `./reducers/posts.js`
-  5. Import the reducers into the rootReducer and combine the with the `combineReducers({comments, posts})`. Everything should be working right now and you can continue up to **video 7**.
+  5. Import the reducers into the rootReducer and combine the with the `combineReducers({comments, posts})`. The application now should be able to render without errors.
+
+### Connecting the store and action creators to a component
+
+To actually be able to see the data from the store, we need to use the `connect` function from `react-redux`. It is a higher order function and can basically transport your state anywhere you want, without you having to pass it to as props the components in your application.
+
+``` js
+export default connect(
+  mapStateToProps, // Get the data from the store
+  mapDispatchToProps // Get the actions from the actionCreators
+)(Single)
+
+const mapStateToProps = state => {
+  return {
+    posts: state.posts,
+    comments: state.comments
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(actionCreators, dispatch)
+}
+```
+
+For growing applications it is recommendend to use action creators, but if you don't use the `bindActionCreators` function, you can simply use the `dispatch` function from `mapStateToProps`. 
+
