@@ -5,7 +5,7 @@ export function increment (postID) {
 
   // action object
   return {
-    type: 'INCREMENT',
+    type: 'INCREMENT_LIKES',
     postID
   }
 }
